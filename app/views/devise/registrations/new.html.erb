@@ -9,12 +9,15 @@
   </div>
   <div class="field">
     <%= f.label :age %><br />
-    <%= f.number_field :age, autofocus: true, autocomplete: "age" %>
+    <%#= f.number_field :age, autofocus: true, autocomplete: "age" %>
+    <%= f.date_select :age, use_month_numbers: true,start_year: 1950, end_year: (Time.now.year - 10), default: Date.new(1990, 1, 1) %>
+
   </div>
   </div>
   <div class="field">
     <%= f.label :gender %><br />
-    <%= f.text_field :gender, autofocus: true, autocomplete: "gender" %>
+    <%= f.select :gender, [["男性", "男性"], ["女性", "女性"]], include_blank: "選択して下さい" %>
+
   </div>
   <div class="field">
     <%= f.label :email %><br />
