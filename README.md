@@ -60,6 +60,19 @@
 |loser_id   |integer |null:false        |敗者のID            |
 |profile_id |integer |foreign_key: true |プロフィールの外部キー |
 
+## evaluations
+|colum              |type   |option           |補足          |
+|-------------------|-------|-----------------|--------------|
+|seder_id           |integer|null:false       |評価する人　　|
+|receiver_id        |integer|null:false       |評価される人　　|
+|battle_history_id  |integer|foreign_key:true |対戦記録の外部キー　　|
+|attitude           |integer|null:false       |態度　　|
+|rob                |integer|null:false       |ロブ　　|
+|stroke             |integer|null:false       |ストローク　　|
+|volley             |integer|null:false       |ボレー　　|
+|saab               |integer|null:false       |サーブ　　|
+|strategy           |integer|null:false       |戦略　　|
+|impressions        |text   |                 |感想　　|
 ## plans
 |colum     |type    |option            |補足         |
 |----------|--------|------------------|-------------|
