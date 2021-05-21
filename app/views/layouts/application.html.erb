@@ -10,6 +10,8 @@
   </head>
   <%= link_to "ログイン", new_user_session_path %>
   <%= link_to "サインアップ", new_user_registration_path %>
+  <%= link_to "ログアウト", destroy_user_session_path ,method: :delete%>
+  <%= current_user.nickname if signed_in?%>
   <body>
     <%= yield %>
   </body>
