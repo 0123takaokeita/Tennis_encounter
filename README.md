@@ -84,7 +84,7 @@ belongs_to :user
 |-----------|--------|------------------|-------------------|
 |winner_id  |integer |null:false        |勝者のID            |
 |loser_id   |integer |null:false        |敗者のID            |
-|plan_id |integer |foreign_key: true |プロフィールの外部キー |
+|plan_id |integer |foreign_key: true |募集の外部キー |
 
 ### association
 belongs_to :plan
