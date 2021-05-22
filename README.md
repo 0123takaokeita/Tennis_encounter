@@ -3,7 +3,7 @@
 ## users                 
 |colum                |type   |option       |補足        |
 |---------------------|-------|-------------|-----------|
-|nickname             |string | null:false  |名前        |  
+|nickname             |string | null:false, unique: true  |名前        |  
 |email                |string | null:false  |アドレス     |
 |gender               |string | null:false  |性別        |    
 |encrypted_password   |string | null:false  |暗号        |  
