@@ -10,8 +10,11 @@
   <div class="field">
     <%= f.label :age %><br />
     <%#= f.number_field :age, autofocus: true, autocomplete: "age" %>
-    <%= f.date_select :age, use_month_numbers: true,start_year: 1950, end_year: (Time.now.year - 10), default: Date.new(1990, 1, 1) %>
-
+    <%= f.date_select :age, 
+      use_month_numbers: true,
+      start_year: 1950,
+      end_year: (Time.now.year - 10), 
+      default: Date.new(1990, 1, 1) %>
   </div>
   </div>
   <div class="field">
