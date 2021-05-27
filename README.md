@@ -1,3 +1,19 @@
+# アプリ名
+Tennis encounter
+
+# 内容
+テニスのプレイヤー同士のマッチング記録アプリケーション。
+アプリを使って対戦を募集・記録することで競技者の経験値の向上と地域交流の活発化を期待して作成している。
+試合経験を積みたいけど対戦相手を見つけることがなかなかできない（自分よりレベルの高い人ばかり見つかる。）そんな経験からの着想である。
+やる気があるのにくすぶっているプレイヤーに使用してもらいたい。
+
+
+# ペルソナ
+- コンペ以外でも試合経験を積んで行きたい向上心のあるプレイヤー
+- 自分にあった対戦相手がなかなか見つけられないプレイヤー
+- コンペ以外でも地域外にでて活動したいと思っているプレイヤー
+- 主にシングルスプレイヤー向け
+
 # 設計
 
 ## users                 
@@ -5,17 +21,18 @@
 |---------------------|-------|-------------|-----------|
 |nickname             |string | null:false, unique: true  |名前        |  
 |email                |string | null:false  |アドレス     |
-|gender_id            |integer| null:false  |性別        |    
+|gender_id            |integer| null:false  |性別 　アクティブハッシュ |    
 |encrypted_password   |string | null:false  |暗号        |  
 |age                  |date   |null:false   |年齢        |  
 
-### association
-has_many :comments
-has_many :promises
-has_many :bookmarks
-has_many :plans
-belongs_to : profile
-has_many :follows
+## association
+has_many   :comments
+has_many   :promises
+has_many   :bookmarks
+has_many   :plans
+belongs_to :profile
+has_many   :follows
+belongs_to :authentications
 
 
 
@@ -31,7 +48,7 @@ has_many :follows
 |user_id            |integer |foreign_key: true |ユーザーの外部キー           |
 
 ## association
-belongs_to :profile 
+belongs_to :user
 
 ## comments
 |colum   |type    |option           |補足               |
@@ -42,7 +59,7 @@ belongs_to :profile
 
 ### association
 belongs_to :user
-belongs_to :plans
+belongs_to :plan
 ## promises
 |colum   |type    |option            |補足             |
 |--------|--------|------------------|----------------|
@@ -60,7 +77,7 @@ belongs_to :plan
 
 ### association
 belongs_to :user
-belongs_to: plan
+belongs_to :plan
 ## authentications
 |colum    |type    |option             |補足            |
 |---------|--------|-------------------|---------------|
@@ -78,32 +95,22 @@ belongs_to :user
 
 ### association
 belongs_to :user
-## battle_histories
-|colum      |type    |option            |補足                |
-|-----------|--------|------------------|-------------------|
-|winner_id  |integer |null:false        |勝者のID            |
-|loser_id   |integer |null:false        |敗者のID            |
-|plan_id |integer |foreign_key: true |募集の外部キー |
-
-### association
-belongs_to :plan
-has_many :evaluations
 ## evaluations
 |colum              |type   |option           |補足          |
 |-------------------|-------|-----------------|--------------|
-|seder_id           |integer|null:false       |評価する人　　|
+|sender_id          |integer|null:false       |評価する人　　|
 |receiver_id        |integer|null:false       |評価される人　　|
-|battle_history_id  |integer|foreign_key:true |対戦記録の外部キー　　|
+|plan_id            |integer|foreign_key:true |募集の外部キー　　|
 |attitude           |integer|null:false       |態度　　|
 |rob                |integer|null:false       |ロブ　　|
 |stroke             |integer|null:false       |ストローク　　|
 |volley             |integer|null:false       |ボレー　　|
 |saab               |integer|null:false       |サーブ　　|
 |strategy           |integer|null:false       |戦略　　|
-|impressions        |text   |                 |感想　　|
+|impression         |text   |                 |感想　　|
 
 ### association
-belongs_to :battle_histories
+belongs_to :plan
 ## plans
 |colum     |type    |option            |補足         |
 |----------|--------|------------------|-------------|
@@ -116,10 +123,11 @@ belongs_to :battle_histories
 |ball_name |string  |                  |ボールの種類    |
 |level     |string  |null: false       |競技レベル      |
 |rule      |string  |null: false       |競技ルール      |
+|winner_id |integer |                  |勝者のID       |
+|loser_id  |integer |                  |敗者のID       |
 |user_id   |integer |foreign_key: true |ユーザー外部キー |
 
 ### association
-belongs_to :battle_history
 has_many :plan_tags
 has_many :tags, through: :plan_tags
 ## tag_relations
