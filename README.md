@@ -5,7 +5,7 @@
 |---------------------|-------|-------------|-----------|
 |nickname             |string | null:false, unique: true  |名前        |  
 |email                |string | null:false  |アドレス     |
-|gender               |string | null:false  |性別        |    
+|gender_id            |integer| null:false  |性別        |    
 |encrypted_password   |string | null:false  |暗号        |  
 |age                  |date   |null:false   |年齢        |  
 
@@ -22,13 +22,12 @@ has_many :follows
 ## profiles
 |colum              |type    |option            |補足                       |    
 |-------------------|--------|------------------|--------------------------|
-|starting_age       |integer |null:false        |開始年齢                    |
+|starting_age       |integer |                  |開始年齢                    |
 |introduction       |text    |                  |自己紹介文                  |
-|prefecture_id      |integer |null:false        |都道府県、アクティブハッシュ   |
+|prefecture_id      |integer |                  |都道府県、アクティブハッシュ   |
 |racket             |string  |                  |使用ラケット                |
 |club               |string  |                  |所属クラブ                  |
-|court_type         |string  |null:false        |対応可能コート、プルダウン式   |
-|battle_history_id  |integer |foreign_key: true |戦歴の外部キー               |
+|court_type         |string  |                  |対応可能コート、プルダウン式   |
 |user_id            |integer |foreign_key: true |ユーザーの外部キー           |
 
 ## association
