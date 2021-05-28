@@ -4,7 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable
 
-    # belongs_to :gender
+    extend ActiveHash::Associations::ActiveRecordExtensions
+    belongs_to :gender
+        
     # パスワードの正規表現。半角英数字混合。
 
     # 空では登録できない。
