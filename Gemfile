@@ -36,6 +36,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'faker'
+  gem "gimei", "~> 1.0"
 end
 
 group :development do
@@ -60,8 +61,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
-
-gem "gimei", "~> 1.0"
 
 gem "active_hash", "~> 3.1"
 

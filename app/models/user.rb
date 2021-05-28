@@ -4,13 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable
 
-    enum gender: {man: 0, women: 1, other: 2}
+    # belongs_to :gender
     # パスワードの正規表現。半角英数字混合。
 
     # 空では登録できない。
     with_options presence: true do
       validates :nickname
-      validates :gender
+      validates :gender_id
       validates :age
     end   
 end

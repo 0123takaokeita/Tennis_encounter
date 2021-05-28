@@ -18,8 +18,8 @@
   </div>
   </div>
   <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.select :gender, [["男性", "男性"], ["女性", "女性"]], include_blank: "選択して下さい" %>
+    <%= f.label :gender_id %><br />
+    <%= collection_select :user ,:gender_id, Gender.all, :id, :name %>
 
   </div>
   <div class="field">
