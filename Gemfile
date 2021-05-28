@@ -62,3 +62,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 gem "gimei", "~> 1.0"
+
+gem "active_hash", "~> 3.1"
+
+gem "tailwindcss-rails", "~> 0.3.3"
