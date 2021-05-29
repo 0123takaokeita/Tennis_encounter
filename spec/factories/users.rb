@@ -5,12 +5,9 @@ FactoryBot.define do
     
     nickname              {Gimei.unique.name}
     age                   {Faker::Date.between(from: '1950/1/1', to: Date.today.ago(16.years))}      
-    gender                {['男性','女性'][rand(2)]}
+    gender_id             {1}
     email                 {Faker::Internet.email}
     password              {word}
     password_confirmation {word}
-
-
-
   end
 end
