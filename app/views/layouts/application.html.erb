@@ -9,8 +9,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
   </head>
+  <%= render "share/header" %>
 
   <body>
     <%= yield %>
   </body>
+  <%= render "share/footer" %>
 </html>
