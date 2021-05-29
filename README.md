@@ -14,6 +14,13 @@ Tennis encounter
 - コンペ以外でも地域外にでて活動したいと思っているプレイヤー
 - 主にシングルスプレイヤー向け
 
+
+# 使用技術
+- Ruby 2.7.0
+- Ruby on Rails 6.0.3.7
+- node 14.16.0
+- tail wind css
+- Rspec 
 # 設計
 
 ## users                 
