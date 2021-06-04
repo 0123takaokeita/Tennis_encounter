@@ -2,17 +2,16 @@
 Tennis encounter
 
 # 内容
-テニスのプレイヤー同士のマッチング記録アプリケーション。
-アプリを使って対戦を募集・記録することで競技者の経験値の向上と地域交流の活発化を期待して作成している。
-試合経験を積みたいけど対戦相手を見つけることがなかなかできない（自分よりレベルの高い人ばかり見つかる。）そんな経験からの着想である。
-やる気があるのにくすぶっているプレイヤーに使用してもらいたい。
+テニスプレイヤーのパラメーターを可視化して個人のスキルアップに役立てるアプリケーションです。
+試合の結果から対戦相手に評価をしてもらい、自分のパラメータが作成されます。
+苦手分野への対策や見えていなかった特徴を考える切っ掛けになるように作成をしています。
 
 
-# ペルソナ
-- コンペ以外でも試合経験を積んで行きたい向上心のあるプレイヤー
-- 自分にあった対戦相手がなかなか見つけられないプレイヤー
-- コンペ以外でも地域外にでて活動したいと思っているプレイヤー
-- 主にシングルスプレイヤー向け
+# ターゲット
+- 試合のシートを記入してもらうほどのサポートが受けられない人
+- 試合のときに自分で考える力を伸ばしたい人
+- 考える力を伸ばす指導をしたいコーチ
+- ゲーム感覚で楽しく続けたいライト層にも
 
 
 # 使用技術
@@ -33,25 +32,16 @@ Tennis encounter
 |age                  |date   |null:false   |年齢        |  
 
 ## association
-has_many   :comments
-has_many   :promises
-has_many   :bookmarks
-has_many   :plans
-belongs_to :profile
-has_many   :follows
-belongs_to :authentications
-
+has_many :plans
+hasa_many :comments
 
 
 ## profiles
 |colum              |type    |option            |補足                       |    
 |-------------------|--------|------------------|--------------------------|
-|starting_age       |integer |                  |開始年齢                    |
 |introduction       |text    |                  |自己紹介文                  |
 |prefecture_id      |integer |                  |都道府県、アクティブハッシュ   |
-|racket             |string  |                  |使用ラケット                |
 |club               |string  |                  |所属クラブ                  |
-|court_type         |string  |                  |対応可能コート、プルダウン式   |
 |user_id            |integer |foreign_key: true |ユーザーの外部キー           |
 
 ## association
@@ -60,64 +50,38 @@ belongs_to :user
 ## comments
 |colum   |type    |option           |補足               |
 |--------|--------|-----------------|------------------|
-|content |text    |null:false       |コメントテキスト     |
+|memo    |text    |null:false       |コメントテキスト     |
 |user_id |integer |foreign_key: true|ユーザーの外部キー   |
 |plan_id |integer |foreign_key: true|募集の外部キー      |
 
 ### association
 belongs_to :user
 belongs_to :plan
-## promises
-|colum   |type    |option            |補足             |
-|--------|--------|------------------|----------------|
-|plan_id |integer |foreign_key: true |募集の外部キー    |
-|user_id |integer |foreign_key: true |ユーザーの外部キー |
 
-### association
-belongs_to :user
-belongs_to :plan
-## bookmarks
-|colum   |type   |option           |補足             |
-|--------|-------|-----------------|----------------|
-|plan_id |integer|foreign_key: true|募集の外部キー     |    
-|user_id |integer|foreign_key: true|ユーザーの外部キー |        
-
-### association
-belongs_to :user
-belongs_to :plan
-## authentications
-|colum    |type    |option             |補足            |
-|---------|--------|-------------------|---------------|
-|uid      |string  |null: false        |APIのユーザーID  |
-|user_id  |integer |foreign_key: true  |ユーザーの外部キー|
-|provider |string  |null: false        |プロバイダの識別  |
-
-### association
-belongs_to :user
-## follows
-|colum       |type      |option            |補足                 |
-|------------|----------|------------------|--------------------|
-|user_id     |integer   |foreign_key: true | ユーザー外部キー      |
-|followed_id |integer   |null: false       | フォローしたユーザーID |
-
-### association
-belongs_to :user
-## evaluations
+## score
 |colum              |type   |option           |補足          |
 |-------------------|-------|-----------------|--------------|
-|sender_id          |integer|null:false       |評価する人　　|
-|receiver_id        |integer|null:false       |評価される人　　|
-|plan_id            |integer|foreign_key:true |募集の外部キー　　|
-|attitude           |integer|null:false       |態度　　|
-|rob                |integer|null:false       |ロブ　　|
-|stroke             |integer|null:false       |ストローク　　|
-|volley             |integer|null:false       |ボレー　　|
-|saab               |integer|null:false       |サーブ　　|
-|strategy           |integer|null:false       |戦略　　|
-|impression         |text   |                 |感想　　|
+|user_id | integer | foreign_key: true |ユーザーの外部キー|
+|receiver_id | integer | null: false | 対戦相手のID |
+|f_slice | integer | null: false | フォアスライス |
+|b_slice |integer  |null: false |バックスライス  |
+|f_spin |integer  |null: false  |フォアスピン  |
+|b_spin |integer  |null: false  |バックスピン  |
+|f_volley |integer  |null: false  |フォアボレー  |
+|b_volley |integer  |null: false  |バックボレー  |
+|sp_saab  |integer  |null: false  |スピンサーブ  |
+|sl_saab  |integer  |null: false  |スライスサーブ  |
+|f_saab |integer  |null: false  |フラットサーブ  |
+|impression |text  |null: false |感想  |
+|etiquette |integer  |null: false |エチケット  |
+|miss |integer  |null: false  |ミスショット  |
+|plan_id  |integer  |foreign_key: true | 募集のID　|
 
-### association
+## association
 belongs_to :plan
+belongs_to :user
+
+
 ## plans
 |colum     |type    |option            |補足         |
 |----------|--------|------------------|-------------|
@@ -127,30 +91,12 @@ belongs_to :plan
 |end_time  |date    |null: false       |終了時間       |
 |price     |integer |null: false       |参加費用       |
 |court_type|string  |null: false       |コートの種類    |
-|ball_name |string  |                  |ボールの種類    |
-|level     |string  |null: false       |競技レベル      |
 |rule      |string  |null: false       |競技ルール      |
 |winner_id |integer |                  |勝者のID       |
 |loser_id  |integer |                  |敗者のID       |
 |user_id   |integer |foreign_key: true |ユーザー外部キー |
 
-### association
-has_many :plan_tags
-has_many :tags, through: :plan_tags
-## tag_relations
-|colum    |type    |option            |補足          |
-|---------|--------|------------------|-------------|
-|tag_id   |integer |foreign_key: true |タグの外部キー |
-|plan_id  |integer |foreign_key: true |募集の外部キー　|
-
-### association
-belongs_to :plan
-belongs_to :tag
-
-## tags
-|colum    |type   |option            |補足      |
-|---------|-------|------------------|----------|
-|tag_name |integer|foreign_key: true |タグの名前  |
-### association
-has_many :plan_tags
-has_many :plan, though: :plan_tags
+## association
+belongs_to :user
+has_many :comments
+has_many :scores
