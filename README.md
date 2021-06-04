@@ -100,3 +100,6 @@ belongs_to :user
 belongs_to :user
 has_many :comments
 has_many :scores
+
+![db](https://user-images.githubusercontent.com/65272471/120784424-09b39700-c567-11eb-8b7c-f11316b837d7.png)
+
