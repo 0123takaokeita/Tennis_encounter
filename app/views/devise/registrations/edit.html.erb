@@ -1,0 +1,122 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>
+
+
+
+<%= form_with model: @user, url: registration_path(resource_name), method: :patch local: true do |f| %>
+<div class="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden">
+  <div class="px-4 py-8 sm:px-10">
+    <div class="relative mt-6">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-300">
+        </div>
+      </div>
+      <div class="relative flex justify-center text-sm leading-5">
+        <span class="px-2 text-gray-500 bg-white">
+          アカウント情報編集
+        </span>
+      </div>
+    </div>
+    <div class="mt-6">
+      <div class="w-full space-y-6">
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="w-full">
+          <div class=" relative ">
+            <%= f.text_field :nickname, placeholder:"ニックネーム", class:" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"  %>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <div class=" relative ">
+            <%= f.email_field :email,  placeholder:"メールアドレス",class:" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" %>
+          </div>
+        </div>
+        <div class="w-full">
+          <div class=" relative ">
+            <%= f.password_field :password,  placeholder:"パスワード",class:" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" %>
+          </div>
+        </div>
+        <div class="w-full">
+          <div class=" relative ">
+            <%= f.password_field :password_confirmation, placeholder: "パスワード確認", class:" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" %>
+          </div>
+        </div>
+        <div class="w-full">
+          <div class=" relative ">
+          <%= f.label '性別',class: "text-gray-400" %><br>
+          <%= collection_select :user ,:gender_id, Gender.all, :id, :name ,{}, {class:" rounded-lg border-transparent flex-1 appearance-none border border-gray-300  py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"} %>
+          </div>
+        </div>
+        <div class="w-full">
+          <div class=" relative ">
+          <%= f.label '生年月日',class: "text-gray-400" %><br>
+          <%= raw sprintf(
+                f.date_select( :age,
+                  {use_month_numbers: true,
+                  start_year: 1950,
+                  end_year: (Time.now.year - 10),
+                  prompt: '---',
+                  date_separator: '%s'},
+                  {class:"rounded-lg border-transparent flex-1 appearance-none border border-gray-300  py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"}
+                ),'年','月'
+            )+'日'
+          %>
+
+          </div>
+        </div>
+        <div>
+          <span class="block w-full rounded-md shadow-sm">
+            <%= f.submit "登録する" , class: "py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="px-4 py-6 border-t-2 border-gray-200 bg-gray-50 sm:px-10">
+    <p class="text-xs leading-5 text-gray-500">
+      This data are display for information and can change
+    </p>
+  </div>
+</div>
+<% end %>
