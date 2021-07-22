@@ -1,26 +1,44 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<%= form_with model: @user, url: user_session_path, local: true do |f| %>
+<div class="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden">
+  <div class="px-4 py-8 sm:px-10">
+    <div class="relative mt-6">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-300">
+        </div>
+      </div>
+      <div class="relative flex justify-center text-sm leading-5">
+        <span class="px-2 text-gray-500 bg-white">
+          ログイン
+        </span>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="mt-6">
+      <div class="w-full space-y-6">
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="w-full">
+          <div class=" relative ">
+            <%= f.email_field :email,  placeholder:"メールアドレス",class:" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" %>
+          </div>
+        </div>
+        <div class="w-full">
+          <div class=" relative ">
+            <%= f.password_field :password,  placeholder:"パスワード",class:" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" %>
+          </div>
+        </div>
+        <div>
+          <span class="block w-full rounded-md shadow-sm">
+            <%= f.submit "ログイン" , class: "py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " %>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="px-4 py-6 border-t-2 border-gray-200 bg-gray-50 sm:px-10">
+    <p class="text-xs leading-5 text-gray-500">
+      This data are display for information and can change
+    </p>
+  </div>
+</div>
 <% end %>
-
-<%= render "devise/shared/links" %>

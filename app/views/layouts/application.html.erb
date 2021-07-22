@@ -9,8 +9,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
   </head>
-  <%= render "share/header" %>
-
+  <%= link_to "ログイン", new_user_session_path %>
+  <%= link_to "サインアップ", new_user_registration_path %>
+  <% if signed_in?%>
+  <%= link_to "ログアウト", destroy_user_session_path ,method: :delete%>
+  <%= link_to current_user.nickname, users_show_path(id: current_user.id) %>
+  
+  <% end %>
   <body>
     <%= yield %>
   </body>
